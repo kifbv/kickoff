@@ -1,0 +1,6 @@
+{
+  "name": "{{PROJECT_NAME}}",
+  "branchName": "ralph/initial",
+  "description": "{{PROJECT_DESCRIPTION}}",
+  "userStories": []
+}

@@ -1,0 +1,122 @@
+# Kickoff
+
+A framework for going from "I have a project idea" to autonomous implementation using the Ralph loop pattern.
+
+## What is this?
+
+Kickoff guides you through four phases to take a greenfield project from idea to working code:
+
+1. **Interview** - Structured conversation to define your project's vision, users, and scope
+2. **Discover** - Automatically generate detailed feature specs from your project overview
+3. **Plan** - Create an implementation plan with atomic, prioritized tasks
+4. **Build** - Autonomous loop that implements one task per iteration until done
+
+## Quick Start
+
+### 1. Scaffold a new project
+
+```bash
+./scripts/scaffold.sh ~/Projects/my-app "My App"
+cd ~/Projects/my-app
+```
+
+### 2. Define your project
+
+```bash
+./ralph/ralph.sh interview
+```
+
+This starts an interactive session that asks about your project idea, identifies Jobs to Be Done, scopes v1, and writes `specs/project-overview.md`.
+
+### 3. Generate feature specs
+
+```bash
+./ralph/ralph.sh discover
+```
+
+Creates a detailed feature spec (`specs/[topic].md`) for each JTBD identified in the interview.
+
+### 4. Create implementation plan
+
+```bash
+./ralph/ralph.sh plan
+```
+
+Produces `IMPLEMENTATION_PLAN.md` and `prd.json` with atomic, dependency-ordered user stories.
+
+### 5. Build it
+
+```bash
+./ralph/ralph.sh build
+```
+
+Starts the Ralph loop. Each iteration picks one story, implements it, runs quality checks, commits, and updates progress. Continues until all stories pass.
+
+## Commands
+
+```bash
+./ralph/ralph.sh interview              # Interactive project interview
+./ralph/ralph.sh discover [max]         # Feature spec generation
+./ralph/ralph.sh plan [max]             # Gap analysis + task list
+./ralph/ralph.sh plan-work "desc" [max] # Scoped planning
+./ralph/ralph.sh build [max]            # Implementation (default)
+./ralph/ralph.sh [max]                  # Shorthand for build
+```
+
+## Configuration
+
+| Environment Variable | Default | Description |
+|---------------------|---------|-------------|
+| `RALPH_MODEL` | opus (plan) / sonnet (build) | Claude model to use |
+| `RALPH_DELAY` | 3 | Seconds between iterations |
+| `PUSH_AFTER_ITERATION` | false | Git push after each iteration |
+
+## Project Structure
+
+After scaffolding, your project looks like:
+
+```
+my-app/
+├── CLAUDE.md                  # Build/test/lint commands + operational notes
+├── IMPLEMENTATION_PLAN.md     # Living task list
+├── progress.txt               # Append-only learning log
+├── prd.json                   # User stories with pass/fail tracking
+├── specs/                     # Requirement specs (one per feature)
+│   └── project-overview.md    # From interview phase
+├── ralph/                     # Loop files
+│   ├── ralph.sh
+│   └── PROMPT_*.md
+├── archive/                   # Previous runs
+└── src/                       # Your code
+```
+
+## Philosophy
+
+Based on the [Ralph loop pattern](https://ghuntley.com/ralph/) by Geoffrey Huntley:
+
+- **Fresh context per session** - Each iteration starts clean, no context pollution
+- **One task per loop** - Maximum utilization of the model's "smart zone"
+- **State via files** - `prd.json`, `progress.txt`, and git provide memory between sessions
+- **Backpressure** - Tests, typechecks, and lints force correctness
+- **Let Ralph Ralph** - Trust the loop to self-correct through iteration
+
+See [docs/philosophy.md](docs/philosophy.md) for more details.
+
+## Skills
+
+When working in this repo with Claude Code, these skills are available:
+
+- `/interview` - Start a project discovery interview
+- `/discover` - Generate a feature spec from JTBD
+- `/prd` - Create a PRD for a feature
+- `/prd-to-json` - Convert a PRD to prd.json format
+- `/scaffold` - Scaffold a new project
+
+## Credits
+
+Inspired by:
+- [Geoffrey Huntley's Ralph pattern](https://ghuntley.com/ralph/)
+- [Anthropic's autonomous coding quickstart](https://github.com/anthropics/claude-quickstarts)
+- [Snarktank's Ralph implementation](https://github.com/snarktank/ralph)
+- [Clayton Farr's Ralph playbook](https://github.com/ClaytonFarr/ralph-playbook)
+- [Anthropic: Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
