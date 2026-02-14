@@ -40,7 +40,7 @@ echo ""
 
 # Create directory structure
 echo "Creating directory structure..."
-mkdir -p "$TARGET_DIR"/{specs,ralph,archive,src}
+mkdir -p "$TARGET_DIR"/{specs,ralph,archive,src,designs}
 
 # Copy and customize CLAUDE.md
 echo "Creating CLAUDE.md..."
