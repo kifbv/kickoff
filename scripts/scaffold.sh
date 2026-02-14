@@ -76,6 +76,16 @@ cp "$PROMPTS_DIR/PROMPT_plan_work.md" "$TARGET_DIR/ralph/"
 cp "$PROMPTS_DIR/PROMPT_discover.md" "$TARGET_DIR/ralph/"
 cp "$PROMPTS_DIR/PROMPT_interview.md" "$TARGET_DIR/ralph/"
 
+# Copy skills (skip scaffold - only useful inside kickoff repo)
+echo "Copying skills..."
+SKILLS_DIR="$KICKOFF_DIR/skills"
+for skill_dir in "$SKILLS_DIR"/*/; do
+  skill_name=$(basename "$skill_dir")
+  [ "$skill_name" = "scaffold" ] && continue
+  mkdir -p "$TARGET_DIR/.claude/skills/$skill_name"
+  cp "$skill_dir/SKILL.md" "$TARGET_DIR/.claude/skills/$skill_name/"
+done
+
 # Record upstream source for ralph update
 KICKOFF_REMOTE=$(cd "$KICKOFF_DIR" && git remote get-url origin 2>/dev/null | sed 's|git@github.com:|https://raw.githubusercontent.com/|;s|\.git$|/main|') || true
 echo "${KICKOFF_REMOTE:-https://raw.githubusercontent.com/kifbv/kickoff/main}" > "$TARGET_DIR/ralph/.ralph-upstream"

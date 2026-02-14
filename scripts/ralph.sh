@@ -116,6 +116,20 @@ if [ "$MODE" = "update" ]; then
     fi
   done
 
+  # Update skills
+  SKILLS_DIR="$PROJECT_DIR/.claude/skills"
+  for skill in design-sync discover interview prd prd-to-json; do
+    mkdir -p "$SKILLS_DIR/$skill"
+    if curl -sfL "$REPO_URL/skills/${skill}/SKILL.md" -o "$SKILLS_DIR/$skill/SKILL.md.tmp"; then
+      mv "$SKILLS_DIR/$skill/SKILL.md.tmp" "$SKILLS_DIR/$skill/SKILL.md"
+      echo "  Updated skill: $skill"
+    else
+      rm -f "$SKILLS_DIR/$skill/SKILL.md.tmp"
+      echo "  Failed to update skill: $skill"
+      FAILED=1
+    fi
+  done
+
   # Create designs/ if missing
   mkdir -p "$PROJECT_DIR/designs"
 

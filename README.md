@@ -130,6 +130,7 @@ After scaffolding, your project looks like:
 
 ```
 my-app/
+├── .claude/skills/            # Claude Code skills (design-sync, interview, etc.)
 ├── CLAUDE.md                  # Build/test/lint commands + operational notes
 ├── IMPLEMENTATION_PLAN.md     # Living task list
 ├── progress.txt               # Append-only learning log
