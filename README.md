@@ -12,6 +12,23 @@ Kickoff guides you through four phases to take a greenfield project from idea to
 4. **Plan** - Create an implementation plan with atomic, prioritized tasks
 5. **Build** - Autonomous loop that implements one task per iteration until done
 
+## Prerequisites
+
+**Required:**
+
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) - the CLI that powers the Ralph loop
+- `git` - version control
+- `jq` - JSON processing (used by ralph.sh to track story progress)
+- `curl` - for the one-liner install and `update` command
+
+**Recommended:**
+
+- [obra/superpowers](https://github.com/obra/superpowers) skills - TDD, debugging, brainstorming, and other structured workflows that improve build quality
+
+**Optional:**
+
+- [Stitch MCP server](https://stitch.withgoogle.com/) - enables the `/design-sync` skill for importing UI mockups (see step 3 below)
+
 ## Quick Start
 
 ### 1. Scaffold a new project
