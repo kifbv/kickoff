@@ -7,9 +7,10 @@ A framework for going from "I have a project idea" to autonomous implementation 
 Kickoff guides you through four phases to take a greenfield project from idea to working code:
 
 1. **Interview** - Structured conversation to define your project's vision, users, and scope
-2. **Discover** - Automatically generate detailed feature specs from your project overview
-3. **Plan** - Create an implementation plan with atomic, prioritized tasks
-4. **Build** - Autonomous loop that implements one task per iteration until done
+2. **Design Sync** *(optional)* - Import UI mockups from Stitch to generate design-driven feature specs
+3. **Discover** - Automatically generate detailed feature specs from your project overview
+4. **Plan** - Create an implementation plan with atomic, prioritized tasks
+5. **Build** - Autonomous loop that implements one task per iteration until done
 
 ## Quick Start
 
@@ -38,15 +39,27 @@ cd ~/Projects/my-app
 
 This starts an interactive session that asks about your project idea, identifies Jobs to Be Done, scopes v1, and writes `specs/project-overview.md`.
 
-### 3. Generate feature specs
+### 3. (Optional) Import UI designs
+
+If you have mockups in a [Stitch](https://stitch.withgoogle.com/) project, you can import them before generating specs:
+
+```bash
+/design-sync
+```
+
+This connects to your Stitch project, maps screens to the JTBD from the interview, generates feature specs with design references, and saves screen HTML to `designs/` as layout/styling references for the build phase. Any JTBD covered by designs will be skipped during the next step.
+
+> **Note:** This is a Claude Code skill, not a ralph.sh command. Run it interactively in Claude Code.
+
+### 4. Generate feature specs
 
 ```bash
 ./ralph/ralph.sh discover
 ```
 
-Creates a detailed feature spec (`specs/[topic].md`) for each JTBD identified in the interview.
+Creates a detailed feature spec (`specs/[topic].md`) for each JTBD identified in the interview. JTBD already covered by design sync are skipped.
 
-### 4. Create implementation plan
+### 5. Create implementation plan
 
 ```bash
 ./ralph/ralph.sh plan
@@ -54,7 +67,7 @@ Creates a detailed feature spec (`specs/[topic].md`) for each JTBD identified in
 
 Produces `IMPLEMENTATION_PLAN.md` and `prd.json` with atomic, dependency-ordered user stories.
 
-### 5. Build it
+### 6. Build it
 
 ```bash
 ./ralph/ralph.sh build
