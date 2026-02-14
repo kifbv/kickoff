@@ -93,11 +93,16 @@ if [ "$MODE" = "update" ]; then
 
   FAILED=0
 
-  # Update ralph.sh
+  # Update ralph.sh (and re-exec if it changed)
   if curl -sfL "$REPO_URL/scripts/ralph.sh" -o "$RALPH_DIR/ralph.sh.tmp"; then
-    mv "$RALPH_DIR/ralph.sh.tmp" "$RALPH_DIR/ralph.sh"
-    chmod +x "$RALPH_DIR/ralph.sh"
-    echo "  Updated ralph.sh"
+    if ! cmp -s "$RALPH_DIR/ralph.sh.tmp" "$RALPH_DIR/ralph.sh"; then
+      mv "$RALPH_DIR/ralph.sh.tmp" "$RALPH_DIR/ralph.sh"
+      chmod +x "$RALPH_DIR/ralph.sh"
+      echo "  Updated ralph.sh (restarting with new version...)"
+      exec "$RALPH_DIR/ralph.sh" update
+    fi
+    rm -f "$RALPH_DIR/ralph.sh.tmp"
+    echo "  ralph.sh is up to date"
   else
     rm -f "$RALPH_DIR/ralph.sh.tmp"
     echo "  Failed to update ralph.sh"
