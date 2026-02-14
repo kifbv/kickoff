@@ -15,8 +15,18 @@ Kickoff guides you through four phases to take a greenfield project from idea to
 
 ### 1. Scaffold a new project
 
+**Option A: One-liner (no clone needed)**
+
 ```bash
-./scripts/scaffold.sh ~/Projects/my-app "My App"
+curl -sfL https://raw.githubusercontent.com/kifbv/kickoff/main/scripts/install.sh | bash -s ~/Projects/my-app "My App"
+cd ~/Projects/my-app
+```
+
+**Option B: From a local clone**
+
+```bash
+git clone git@github.com:kifbv/kickoff.git
+./kickoff/scripts/scaffold.sh ~/Projects/my-app "My App"
 cd ~/Projects/my-app
 ```
 
@@ -60,6 +70,7 @@ Starts the Ralph loop. Each iteration picks one story, implements it, runs quali
 ./ralph/ralph.sh plan [max]             # Gap analysis + task list
 ./ralph/ralph.sh plan-work "desc" [max] # Scoped planning
 ./ralph/ralph.sh build [max]            # Implementation (default)
+./ralph/ralph.sh update                 # Update ralph files from upstream
 ./ralph/ralph.sh [max]                  # Shorthand for build
 ```
 
@@ -70,6 +81,7 @@ Starts the Ralph loop. Each iteration picks one story, implements it, runs quali
 | `RALPH_MODEL` | opus (plan) / sonnet (build) | Claude model to use |
 | `RALPH_DELAY` | 3 | Seconds between iterations |
 | `PUSH_AFTER_ITERATION` | false | Git push after each iteration |
+| `RALPH_UPSTREAM` | auto-detected | Override upstream URL for `update` command |
 
 ## Project Structure
 
@@ -86,6 +98,7 @@ my-app/
 ├── ralph/                     # Loop files
 │   ├── ralph.sh
 │   └── PROMPT_*.md
+├── designs/                   # UI design references (HTML from Stitch)
 ├── archive/                   # Previous runs
 └── src/                       # Your code
 ```
@@ -110,6 +123,7 @@ When working in this repo with Claude Code, these skills are available:
 - `/discover` - Generate a feature spec from JTBD
 - `/prd` - Create a PRD for a feature
 - `/prd-to-json` - Convert a PRD to prd.json format
+- `/design-sync` - Import UI designs from Stitch into project specs
 - `/scaffold` - Scaffold a new project
 
 ## Credits

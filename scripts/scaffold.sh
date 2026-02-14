@@ -76,6 +76,10 @@ cp "$PROMPTS_DIR/PROMPT_plan_work.md" "$TARGET_DIR/ralph/"
 cp "$PROMPTS_DIR/PROMPT_discover.md" "$TARGET_DIR/ralph/"
 cp "$PROMPTS_DIR/PROMPT_interview.md" "$TARGET_DIR/ralph/"
 
+# Record upstream source for ralph update
+KICKOFF_REMOTE=$(cd "$KICKOFF_DIR" && git remote get-url origin 2>/dev/null | sed 's|git@github.com:|https://raw.githubusercontent.com/|;s|\.git$|/main|') || true
+echo "${KICKOFF_REMOTE:-https://raw.githubusercontent.com/kifbv/kickoff/main}" > "$TARGET_DIR/ralph/.ralph-upstream"
+
 # Initialize git if not already a repo
 if [ ! -d "$TARGET_DIR/.git" ]; then
   echo "Initializing git repository..."
