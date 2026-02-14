@@ -92,6 +92,17 @@ Produces `IMPLEMENTATION_PLAN.md` and `prd.json` with atomic, dependency-ordered
 
 Starts the Ralph loop. Each iteration picks one story, implements it, runs quality checks, commits, and updates progress. Continues until all stories pass.
 
+## Updating an Existing Project
+
+To pull the latest ralph.sh and prompt files into a scaffolded project:
+
+```bash
+cd ~/Projects/my-app
+./ralph/ralph.sh update
+```
+
+This fetches the current versions of `ralph.sh` and all `PROMPT_*.md` files from upstream. Your specs, prd.json, progress, and source code are untouched.
+
 ## Commands
 
 ```bash
