@@ -1,6 +1,6 @@
 ---
 name: design-sync
-description: "Import UI designs from Stitch into project specs. Connects to a Stitch design project, maps screens to JTBD, generates feature specs with design references, and saves HTML locally for the build loop. Triggers on: import designs, sync designs, design to spec, stitch import, mockup to spec, design sync."
+description: "Import UI designs from Stitch into project specs. Connects to a Stitch design project, maps screens to JTBD, generates feature specs with design references, synthesizes a design system (DESIGN.md), fills design gaps with Stitch-optimized prompts, and saves HTML locally for the build loop. Triggers on: import designs, sync designs, design to spec, stitch import, mockup to spec, design sync."
 user-invocable: true
 ---
 
@@ -16,9 +16,12 @@ Import UI mockups from a Stitch design project into the specs and designs that d
 2. Map screens to JTBD from `specs/project-overview.md`
 3. Generate feature specs with design references
 4. Save screen HTML locally to `designs/`
-5. Update project-overview.md to mark JTBD as "spec created (from design)"
+5. Synthesize a design system into `designs/DESIGN.md`
+6. Identify uncovered JTBD and generate Stitch-optimized prompts for missing screens
+7. Offer to generate missing screens in Stitch and import them
+8. Update project-overview.md to mark JTBD coverage status
 
-**Important:** Do NOT implement anything. Just create specs and save design references.
+**Important:** Do NOT implement anything. Just create specs, design references, and design system documentation.
 
 ---
 
