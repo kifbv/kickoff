@@ -10,6 +10,7 @@ You are an autonomous coding agent implementing features for a software project.
 0d. Read `progress.txt` - check the Codebase Patterns section at the top first.
 0e. Read `prd.json` for story status and acceptance criteria.
 0f. If `designs/` contains HTML files, check whether the current story references a design. If so, read the relevant HTML file for layout and styling guidance.
+0f2. If `designs/DESIGN.md` exists, read it for design system tokens (colors, typography, spacing, component patterns). Use these for consistency across all UI implementation.
 0g. Read `infra/template.yaml` and `infra/samconfig.toml` if they exist to understand the AWS infrastructure.
 
 ## Task
