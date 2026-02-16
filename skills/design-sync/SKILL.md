@@ -220,6 +220,8 @@ Log Match Result        | Mobile   | 390x884
 |----------|----------|---------|
 | Feature specs | `specs/[topic].md` | Same format as Discover output, drives Plan and Build |
 | Design HTML | `designs/[screen].html` | Layout/styling reference for Build agent |
+| Design system | `designs/DESIGN.md` | Design tokens (colors, typography, spacing, components) for consistent UI |
+| Gap prompts | `designs/prompts/[jtbd].md` | Stitch-optimized prompts for screens that don't exist yet |
 | Updated overview | `specs/project-overview.md` | Marks JTBD as covered so Discover skips them |
 
 ---
@@ -230,6 +232,7 @@ Suggest next steps based on project state:
 
 - If JTBD remain without specs: "Run `./ralph/ralph.sh discover` to spec remaining features."
 - If all JTBD have specs: "Run `./ralph/ralph.sh plan` to create the implementation plan."
+- To convert designs to React components: "Run `/react-components` on individual screens."
 
 ---
 
