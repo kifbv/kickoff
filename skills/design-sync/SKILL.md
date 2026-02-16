@@ -29,11 +29,12 @@ Import UI mockups from a Stitch design project into the specs and designs that d
 1. Call `mcp__stitch__list_projects` to show available design projects.
 2. Present the list and ask the user to select one (or accept the default if only one exists).
 3. Call `mcp__stitch__list_screens` for the selected project.
+4. Call `mcp__stitch__get_project` to retrieve project-level design settings (color mode, fonts, roundness, custom colors). Hold this data for Step 6.
 
 ### Step 2: Screen Inventory
 
-4. For each **visible** screen (skip hidden ones), call `mcp__stitch__get_screen` to get full details.
-5. Present a summary table:
+5. For each **visible** screen (skip hidden ones), call `mcp__stitch__get_screen` to get full details.
+6. Present a summary table:
 
 ```
 Screen                  | Device   | Size
@@ -43,19 +44,19 @@ Player Statistics       | Mobile   | 390x908
 Log Match Result        | Mobile   | 390x884
 ```
 
-6. Ask the user to confirm which screens to import. All visible screens are selected by default.
+7. Ask the user to confirm which screens to import. All visible screens are selected by default.
 
 ### Step 3: Map Screens to JTBD
 
-7. Read `specs/project-overview.md` if it exists.
-8. Propose a mapping of screens to JTBD topics. Group related screens under the same topic.
+8. Read `specs/project-overview.md` if it exists.
+9. Propose a mapping of screens to JTBD topics. Group related screens under the same topic.
    - If project-overview exists: map screens to existing JTBD.
    - If no project-overview: infer JTBD from the screen set and propose them.
-9. Ask the user to confirm or adjust the mapping.
+10. Ask the user to confirm or adjust the mapping.
 
 ### Step 4: Generate Feature Specs
 
-10. For each JTBD group, create `specs/[topic-name-kebab-case].md` with this structure:
+11. For each JTBD group, create `specs/[topic-name-kebab-case].md` with this structure:
 
 ```markdown
 # [Feature Name]
@@ -99,23 +100,23 @@ Log Match Result        | Mobile   | 390x884
 
 ### Step 5: Save Design HTML
 
-11. Download the HTML code from each imported Stitch screen.
-12. Save to `designs/[screen-title-kebab-case].html`.
-13. These files serve as layout and styling references for the Build agent. They are NOT production code to copy verbatim.
+12. Download the HTML code from each imported Stitch screen.
+13. Save to `designs/[screen-title-kebab-case].html`.
+14. These files serve as layout and styling references for the Build agent. They are NOT production code to copy verbatim.
 
 ### Step 6: Update Project Overview
 
-14. If `specs/project-overview.md` exists, mark each covered JTBD as "Status: spec created (from design)".
-15. The Discover phase will skip these and only create specs for JTBD without mockups.
+15. If `specs/project-overview.md` exists, mark each covered JTBD as "Status: spec created (from design)".
+16. The Discover phase will skip these and only create specs for JTBD without mockups.
 
 ### Step 7: Review
 
-16. Present a summary of everything created:
+17. Present a summary of everything created:
     - Feature spec files in `specs/`
     - Design HTML files in `designs/`
     - Updated JTBD status in project-overview
-17. Ask the user if any specs need adjustment.
-18. Commit all files with message: `spec: Add design-synced specs from Stitch`
+18. Ask the user if any specs need adjustment.
+19. Commit all files with message: `spec: Add design-synced specs from Stitch`
 
 ---
 
