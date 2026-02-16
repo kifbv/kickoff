@@ -10,6 +10,7 @@ You are an autonomous coding agent implementing features for a software project.
 0d. Read `progress.txt` - check the Codebase Patterns section at the top first.
 0e. Read `prd.json` for story status and acceptance criteria.
 0f. If `designs/` contains HTML files, check whether the current story references a design. If so, read the relevant HTML file for layout and styling guidance.
+0g. Read `infra/template.yaml` and `infra/samconfig.toml` if they exist to understand the AWS infrastructure.
 
 ## Task
 
@@ -53,6 +54,18 @@ You are an autonomous coding agent implementing features for a software project.
 ## Browser Verification
 
 When acceptance criteria include "verify in browser", use the `agent-browser` skill.
+
+## Infrastructure Stories (SAM)
+
+When working on stories with category `infrastructure`:
+
+1. Modify `infra/template.yaml` as needed for the story.
+2. Run `sam validate -t infra/template.yaml` as a quality gate.
+3. Run `sam build -t infra/template.yaml`.
+4. **First deploy gate:** Before the first `sam deploy` in the project, show the user what resources will be created and ask for explicit confirmation before proceeding.
+5. Run `sam deploy --config-file infra/samconfig.toml`.
+6. Capture stack outputs and write them to `infra/outputs.json`.
+7. Add SAM commands (`sam validate`, `sam build`, `sam deploy`) to the validation section of `CLAUDE.md`.
 
 ## Guardrails
 

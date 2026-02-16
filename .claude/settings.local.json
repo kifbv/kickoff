@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod:*)",
+      "Bash(/home/franck/Projects/kickoff/scripts/scaffold.sh:*)",
+      "Bash(xargs:*)",
+      "Bash(wc:*)",
+      "mcp__stitch__get_screen",
+      "WebFetch(domain:lh3.googleusercontent.com)",
+      "WebSearch",
+      "WebFetch(domain:docs.anthropic.com)"
+    ]
+  }
+}

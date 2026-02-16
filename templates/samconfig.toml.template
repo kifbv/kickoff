@@ -1,0 +1,7 @@
+version = 0.1
+[default.deploy.parameters]
+stack_name = "{{PROJECT_NAME}}-dev"
+region = "{{AWS_REGION}}"
+capabilities = "CAPABILITY_IAM"
+confirm_changeset = true
+resolve_s3 = true

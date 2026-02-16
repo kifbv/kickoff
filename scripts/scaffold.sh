@@ -40,7 +40,7 @@ echo ""
 
 # Create directory structure
 echo "Creating directory structure..."
-mkdir -p "$TARGET_DIR"/{specs,ralph,archive,src,designs}
+mkdir -p "$TARGET_DIR"/{specs,ralph,archive,src,designs,infra}
 
 # Copy and customize CLAUDE.md
 echo "Creating CLAUDE.md..."
@@ -75,6 +75,7 @@ cp "$PROMPTS_DIR/PROMPT_build.md" "$TARGET_DIR/ralph/"
 cp "$PROMPTS_DIR/PROMPT_plan_work.md" "$TARGET_DIR/ralph/"
 cp "$PROMPTS_DIR/PROMPT_discover.md" "$TARGET_DIR/ralph/"
 cp "$PROMPTS_DIR/PROMPT_interview.md" "$TARGET_DIR/ralph/"
+cp "$PROMPTS_DIR/PROMPT_infra.md" "$TARGET_DIR/ralph/"
 
 # Copy skills (skip scaffold - only useful inside kickoff repo)
 echo "Copying skills..."
@@ -138,6 +139,9 @@ echo ""
 echo "  1. cd $TARGET_DIR"
 echo "  2. Run the interview to define your project:"
 echo "     ./ralph/ralph.sh interview"
+echo ""
+echo "  2b. (Optional) Design AWS infrastructure:"
+echo "      ./ralph/ralph.sh infra"
 echo ""
 echo "  3. Generate feature specs from the interview:"
 echo "     ./ralph/ralph.sh discover"
