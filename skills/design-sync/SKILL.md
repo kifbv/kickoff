@@ -148,19 +148,69 @@ Log Match Result        | Mobile   | 390x884
 
 20. Save to `designs/DESIGN.md`.
 
+### Step 7: Fill Gaps
+
+21. Compare the JTBD list from `specs/project-overview.md` against the screens imported in Steps 1-5. Identify JTBD with no matching Stitch screen.
+
+22. If no gaps exist, tell the user "All JTBD have design coverage" and skip to Step 8.
+
+23. Present a table of uncovered JTBD:
+
+    ```
+    Uncovered JTBD              | Reason
+    --------------------------- | ------
+    User authentication         | No matching screen in Stitch
+    Settings & preferences      | No matching screen in Stitch
+    ```
+
+24. For each uncovered JTBD, generate a Stitch-optimized prompt:
+    a. Read the JTBD description from `specs/project-overview.md` for context.
+    b. Read `designs/DESIGN.md` (generated in Step 6) and include its design system as a "DESIGN SYSTEM (REQUIRED)" block.
+    c. Structure the prompt with: one-line page description and vibe, design system block, numbered page structure with specific UI component keywords, color and typography references from DESIGN.md.
+    d. Save to `designs/prompts/[jtbd-name-kebab-case].md`.
+
+25. Present the generated prompts to the user for review.
+
+26. Ask: "Would you like me to generate these screens in Stitch now?"
+    - **a) Yes, all** — generate screens for all uncovered JTBD
+    - **b) Pick which ones** — let the user select specific JTBD to generate
+    - **c) No, skip** — leave prompts saved in `designs/prompts/` for manual use later
+
+27. If the user chooses (a) or (b):
+    a. Infer the device type from existing imported screens. If all are the same type, use that. If mixed, ask the user.
+    b. For each selected JTBD, call `mcp__stitch__generate_screen_from_text` with the prompt content and inferred device type. Note: this can take ~1 minute per screen.
+    c. For each newly generated screen:
+       - Call `mcp__stitch__get_screen` for metadata
+       - Download HTML to `designs/[screen-title-kebab-case].html`
+       - Generate a feature spec in `specs/[topic-name-kebab-case].md` using the same template as Step 4
+    d. Present the newly imported screens alongside the originals in the summary table.
+
 ### Step 8: Update Project Overview
 
-21. If `specs/project-overview.md` exists, mark each covered JTBD as "Status: spec created (from design)".
-22. The Discover phase will skip these and only create specs for JTBD without mockups.
+28. If `specs/project-overview.md` exists, update each JTBD's status based on how it was handled:
+    - **"Status: spec created (from design)"** — JTBD had matching Stitch screens imported in Steps 1-5
+    - **"Status: spec created (from generated design)"** — screen was generated in Step 7 and imported
+    - **"Status: prompt saved (no spec)"** — prompt saved to `designs/prompts/`, user declined generation; Discover phase will create a text-only spec
+
+29. The Discover phase will skip JTBD marked "spec created" and handle the rest.
 
 ### Step 9: Review
 
-23. Present a summary of everything created:
-    - Feature spec files in `specs/`
-    - Design HTML files in `designs/`
-    - Updated JTBD status in project-overview
-24. Ask the user if any specs need adjustment.
-25. Commit all files with message: `spec: Add design-synced specs from Stitch`
+30. Present a summary of everything created:
+
+    ```
+    Created:
+      specs/            N feature specs (N from design, N from generated design)
+      designs/          N HTML files
+      designs/DESIGN.md
+      designs/prompts/  N gap prompts
+
+    Updated:
+      specs/project-overview.md   N/N JTBD covered
+    ```
+
+31. Ask the user if any specs need adjustment.
+32. Commit all files with message: `spec: Add design-synced specs from Stitch`
 
 ---
 
