@@ -72,6 +72,7 @@ Log Match Result        | Mobile   | 390x884
 - **Screens:**
   - [Screen Title] (`[screen-id]`, [device], [width]x[height])
 - **Local HTML:** `designs/[screen-name].html`
+- **Design System:** `designs/DESIGN.md` (colors, typography, spacing, component patterns)
 
 ## User Stories
 
