@@ -104,19 +104,63 @@ Log Match Result        | Mobile   | 390x884
 13. Save to `designs/[screen-title-kebab-case].html`.
 14. These files serve as layout and styling references for the Build agent. They are NOT production code to copy verbatim.
 
-### Step 6: Update Project Overview
+### Step 6: Generate DESIGN.md
 
-15. If `specs/project-overview.md` exists, mark each covered JTBD as "Status: spec created (from design)".
-16. The Discover phase will skip these and only create specs for JTBD without mockups.
+15. Parse each downloaded HTML file in `designs/` for:
+    - Tailwind utility classes (colors, spacing, typography, borders, shadows)
+    - CSS custom properties and variables
+    - Recurring component patterns (cards, buttons, navs, forms, modals)
 
-### Step 7: Review
+16. Use the project metadata from Step 1 (color mode, fonts, roundness, custom colors) to fill in project-level design tokens.
 
-17. Present a summary of everything created:
+17. Synthesize findings into `designs/DESIGN.md` with these sections:
+
+    ```markdown
+    # Design System: [Project Title]
+    **Project ID:** [project-id]
+
+    ## 1. Visual Theme & Atmosphere
+    (Evocative description of the mood, density, and aesthetic philosophy. E.g., "Airy Scandinavian minimal with warm cream tones and generous whitespace.")
+
+    ## 2. Color Palette & Roles
+    (Each color as: Descriptive Name (#hexcode) — functional role. E.g., "Deep Muted Teal-Navy (#294056) — primary actions and CTAs.")
+
+    ## 3. Typography Rules
+    (Font families, weight usage for headings vs body, letter-spacing character. E.g., "Manrope for all text. Bold 700 for headings, Regular 400 for body.")
+
+    ## 4. Component Patterns
+    * **Buttons:** (Shape, color, hover states. E.g., "Pill-shaped, Deep Teal-Navy fill, white text, subtle hover darkening.")
+    * **Cards:** (Corners, background, shadow. E.g., "Generously rounded (rounded-2xl), white surface, whisper-soft shadow.")
+    * **Inputs:** (Border style, background, focus state.)
+    * **Navigation:** (Layout, active state styling.)
+
+    ## 5. Layout Principles
+    (Whitespace strategy, spacing scale, grid patterns, responsive breakpoints observed.)
+    ```
+
+18. Present a summary of the extracted design system to the user:
+    - Number of unique colors found
+    - Font families detected
+    - Number of component patterns identified
+    - Overall vibe in one sentence
+
+19. Ask: "Does this design system look right? Any adjustments before I save it?"
+
+20. Save to `designs/DESIGN.md`.
+
+### Step 8: Update Project Overview
+
+21. If `specs/project-overview.md` exists, mark each covered JTBD as "Status: spec created (from design)".
+22. The Discover phase will skip these and only create specs for JTBD without mockups.
+
+### Step 9: Review
+
+23. Present a summary of everything created:
     - Feature spec files in `specs/`
     - Design HTML files in `designs/`
     - Updated JTBD status in project-overview
-18. Ask the user if any specs need adjustment.
-19. Commit all files with message: `spec: Add design-synced specs from Stitch`
+24. Ask the user if any specs need adjustment.
+25. Commit all files with message: `spec: Add design-synced specs from Stitch`
 
 ---
 
