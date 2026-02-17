@@ -4,13 +4,14 @@ A framework for going from "I have a project idea" to autonomous implementation 
 
 ## What is this?
 
-Kickoff guides you through four phases to take a greenfield project from idea to working code:
+Kickoff guides you through a series of phases to take a greenfield project from idea to working code:
 
 1. **Interview** - Structured conversation to define your project's vision, users, and scope
-2. **Design Sync** *(optional)* - Import UI mockups from Stitch to generate design-driven feature specs
-3. **Discover** - Automatically generate detailed feature specs from your project overview
-4. **Plan** - Create an implementation plan with atomic, prioritized tasks
-5. **Build** - Autonomous loop that implements one task per iteration until done
+2. **Infra** *(optional)* - Design AWS SAM serverless infrastructure from your project overview
+3. **Design Sync** *(optional)* - Import UI mockups from Stitch to generate design-driven feature specs
+4. **Discover** - Automatically generate detailed feature specs from your project overview
+5. **Plan** - Create an implementation plan with atomic, prioritized tasks
+6. **Build** - Autonomous loop that implements one task per iteration until done
 
 ## Prerequisites
 
@@ -27,7 +28,8 @@ Kickoff guides you through four phases to take a greenfield project from idea to
 
 **Optional:**
 
-- [Stitch MCP server](https://stitch.withgoogle.com/) - enables the `/design-sync` skill for importing UI mockups (see step 3 below)
+- [AWS MCP server](https://awslabs.github.io/mcp/) - enables the `/infra` skill for AWS SAM infrastructure design (see step 3 below)
+- [Stitch MCP server](https://stitch.withgoogle.com/) - enables the `/design-sync` skill for importing UI mockups (see step 4 below)
 
 ## Quick Start
 
@@ -56,7 +58,17 @@ cd ~/Projects/my-app
 
 This starts an interactive session that asks about your project idea, identifies Jobs to Be Done, scopes v1, and writes `specs/project-overview.md`.
 
-### 3. (Optional) Import UI designs
+### 3. (Optional) Design infrastructure
+
+If your project needs AWS infrastructure:
+
+```bash
+./ralph/ralph.sh infra
+```
+
+This analyzes your project overview and designs a serverless architecture using AWS SAM, producing `specs/infrastructure.md`, `infra/template.yaml`, and `infra/samconfig.toml`.
+
+### 4. (Optional) Import UI designs
 
 If you have mockups in a [Stitch](https://stitch.withgoogle.com/) project, you can import them before generating specs:
 
@@ -64,11 +76,11 @@ If you have mockups in a [Stitch](https://stitch.withgoogle.com/) project, you c
 /design-sync
 ```
 
-This connects to your Stitch project, maps screens to the JTBD from the interview, generates feature specs with design references, and saves screen HTML to `designs/` as layout/styling references for the build phase. Any JTBD covered by designs will be skipped during the next step.
+This connects to your Stitch project, maps screens to the JTBD from the interview, generates feature specs with design references, synthesizes a design system (`designs/DESIGN.md`), and saves screen HTML to `designs/` as layout/styling references for the build phase. Any JTBD covered by designs will be skipped during the next step.
 
 > **Note:** This is a Claude Code skill, not a ralph.sh command. Run it interactively in Claude Code.
 
-### 4. Generate feature specs
+### 5. Generate feature specs
 
 ```bash
 ./ralph/ralph.sh discover
@@ -76,7 +88,7 @@ This connects to your Stitch project, maps screens to the JTBD from the intervie
 
 Creates a detailed feature spec (`specs/[topic].md`) for each JTBD identified in the interview. JTBD already covered by design sync are skipped.
 
-### 5. Create implementation plan
+### 6. Create implementation plan
 
 ```bash
 ./ralph/ralph.sh plan
@@ -84,7 +96,7 @@ Creates a detailed feature spec (`specs/[topic].md`) for each JTBD identified in
 
 Produces `IMPLEMENTATION_PLAN.md` and `prd.json` with atomic, dependency-ordered user stories.
 
-### 6. Build it
+### 7. Build it
 
 ```bash
 ./ralph/ralph.sh build
@@ -107,6 +119,7 @@ This fetches the current versions of `ralph.sh` and all `PROMPT_*.md` files from
 
 ```bash
 ./ralph/ralph.sh interview              # Interactive project interview
+./ralph/ralph.sh infra                  # AWS SAM infrastructure design
 ./ralph/ralph.sh discover [max]         # Feature spec generation
 ./ralph/ralph.sh plan [max]             # Gap analysis + task list
 ./ralph/ralph.sh plan-work "desc" [max] # Scoped planning
@@ -140,7 +153,10 @@ my-app/
 ├── ralph/                     # Loop files
 │   ├── ralph.sh
 │   └── PROMPT_*.md
-├── designs/                   # UI design references (HTML from Stitch)
+├── designs/                   # UI design references (from Stitch)
+│   ├── DESIGN.md              # Synthesized design system tokens
+│   └── prompts/               # Stitch-optimized prompts for missing screens
+├── infra/                     # AWS SAM infrastructure (template.yaml, samconfig.toml)
 ├── archive/                   # Previous runs
 └── src/                       # Your code
 ```
@@ -162,6 +178,7 @@ See [docs/philosophy.md](docs/philosophy.md) for more details.
 When working in this repo with Claude Code, these skills are available:
 
 - `/interview` - Start a project discovery interview
+- `/infra` - Design AWS SAM serverless infrastructure
 - `/discover` - Generate a feature spec from JTBD
 - `/prd` - Create a PRD for a feature
 - `/prd-to-json` - Convert a PRD to prd.json format
