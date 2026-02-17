@@ -18,17 +18,20 @@ Kickoff guides you through a series of phases to take a greenfield project from 
 **Required:**
 
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) - the CLI that powers the Ralph loop
+- `bash` - ralph.sh requires Bash (not sh/zsh/fish)
 - `git` - version control
 - `jq` - JSON processing (used by ralph.sh to track story progress)
+- `bc` - arithmetic (used by ralph.sh for cost tracking)
 - `curl` - for the one-liner install and `update` command
 
 **Recommended:**
 
 - [obra/superpowers](https://github.com/obra/superpowers) skills - TDD, debugging, brainstorming, and other structured workflows that improve build quality
+- [agent-browser](https://github.com/anthropics/agent-browser) skill - used by the build phase to verify UI changes in a real browser
 
 **Optional:**
 
-- [AWS MCP server](https://awslabs.github.io/mcp/) - enables the `/infra` skill for AWS SAM infrastructure design (see step 3 below)
+- [AWS MCP server](https://awslabs.github.io/mcp/) + [`aws` CLI](https://aws.amazon.com/cli/) + [`sam` CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) - enables the `/infra` skill and SAM deployments during build. The MCP server requires [`uvx`](https://docs.astral.sh/uv/) to run.
 - [Stitch MCP server](https://stitch.withgoogle.com/) - enables the `/design-sync` skill for importing UI mockups (see step 4 below)
 
 ## Quick Start
