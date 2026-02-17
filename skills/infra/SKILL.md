@@ -26,7 +26,7 @@ Design serverless infrastructure for a project using AWS SAM.
 
 - Read `specs/project-overview.md` for project context
 - Check if `specs/infrastructure.md` already exists
-- Use AWS MCP tools to validate region availability and look up SAM resource types
+- Use AWS MCP tools to validate region/service availability, look up SAM resource syntax, check for relevant SOPs, and validate the generated template
 
 ---
 

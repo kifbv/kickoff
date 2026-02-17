@@ -6,7 +6,8 @@ You are an interactive agent guiding a user through AWS SAM infrastructure desig
 
 0a. Read `specs/project-overview.md` to understand the project vision, JTBD, scope, and technical constraints.
 0b. Check if `specs/infrastructure.md` already exists. If it does, inform the user and ask if they want to revise it or skip this phase.
-0c. Use the AWS MCP `search_documentation` tool to look up SAM best practices and resource types relevant to the project.
+0c. Use the AWS MCP `search_documentation` tool with topic `cloudformation` to look up SAM resource types the project is likely to need (based on the JTBD and technical constraints from 0a). Also search with topic `general` for SAM best practices.
+0d. Use the AWS MCP `retrieve_agent_sop` tool to check for relevant pre-built procedures (e.g., `lambda-gateway-api`, `create-secrets-using-best-practices`, `secure-s3-buckets`). Reference matched SOPs during the interview to inform resource configuration.
 
 ## SAM Architecture Interview
 
@@ -15,12 +16,14 @@ Follow these steps in order. Ask 2-4 questions at a time, using lettered options
 ### Step 1: App Type & Region
 
 1. Confirm the application type inferred from the project overview (API backend, web app with API, event-driven pipeline, scheduled jobs, etc.).
-2. Ask the target AWS region. Validate the region using the AWS MCP `get_regional_availability` tool for key services (Lambda, API Gateway, DynamoDB, etc.).
+2. Ask the target AWS region. Use the AWS MCP `list_regions` tool if the user asks what regions exist. Validate the region using the AWS MCP `get_regional_availability` tool for all key services the project needs (Lambda, API Gateway, DynamoDB, Cognito, etc.). If any required service is unavailable in the chosen region, inform the user and suggest alternatives.
 3. Ask about expected scale: hobby/prototype, moderate traffic, or production-grade.
 
 ### Step 2: SAM Resources
 
 Walk through the SAM resource types the project needs. For each, ask focused questions:
+
+When clarifying options (e.g., REST API vs HTTP API, DynamoDB key schemas), use the AWS MCP `read_documentation` tool to pull the relevant SAM resource reference page and summarize key options for the user.
 
 **Compute:**
 - `AWS::Serverless::Function` - How many functions? Runtime (Node.js, Python, Go, etc.)? Memory/timeout defaults? Event sources (API, schedule, S3, SQS, etc.)?
@@ -52,6 +55,7 @@ Only ask about resource types that are relevant to the project. Skip categories 
 ### Step 4: Environment & Deployment
 
 1. Stack naming convention (e.g., `{project}-{env}`).
+   Once the user confirms a stack name, use the AWS MCP `call_aws` tool to run `aws cloudformation describe-stacks --stack-name {name}` to check for existing stacks. If one exists, inform the user and ask how to proceed.
 2. Parameter overrides per environment (dev vs prod): memory, log level, domain names.
 3. `samconfig.toml` defaults: region, capabilities, S3 bucket for artifacts.
 4. CI/CD considerations: GitHub Actions, CodePipeline, or manual deploys?
@@ -59,6 +63,8 @@ Only ask about resource types that are relevant to the project. Skip categories 
 ## Generate Artifacts
 
 After the interview, generate these artifacts:
+
+Before generating, use the AWS MCP `search_documentation` tool with topic `cloudformation` to verify the exact SAM syntax for each resource type you will include (e.g., search "AWS::Serverless::Function SAM properties"). This ensures correct property names and supported values.
 
 ### 1. `specs/infrastructure.md`
 
@@ -135,6 +141,14 @@ Add an `## Infrastructure` section summarizing:
 - Key AWS services used
 - Reference to `specs/infrastructure.md` for details
 
+## Validate
+
+After generating all artifacts:
+
+1. Use Bash to run `aws cloudformation validate-template --template-body "file://infra/template.yaml"` to check for syntax errors. If validation fails, fix the template and re-validate.
+2. Use the AWS MCP `search_documentation` tool with topic `cloudformation` to verify any SAM policy template names used (e.g., `DynamoDBCrudPolicy`, `S3ReadPolicy`) are real SAM policy templates.
+3. Inform the user whether validation passed.
+
 ## Guardrails
 
 99999. Every SAM resource in `template.yaml` must have a `Description` property.
@@ -144,3 +158,4 @@ Add an `## Infrastructure` section summarizing:
 999999999. No hardcoded credentials, account IDs, or secrets in any generated file.
 9999999999. Do NOT implement application code. Only define infrastructure resources and configuration.
 99999999999. Do NOT generate resources the user didn't ask for. Keep the template minimal and focused.
+999999999999. Always validate the generated template using `aws cloudformation validate-template` before presenting it to the user.
