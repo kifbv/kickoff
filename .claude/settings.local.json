@@ -8,7 +8,14 @@
       "mcp__stitch__get_screen",
       "WebFetch(domain:lh3.googleusercontent.com)",
       "WebSearch",
-      "WebFetch(domain:docs.anthropic.com)"
+      "WebFetch(domain:docs.anthropic.com)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(bash -n:*)",
+      "Bash(git branch:*)",
+      "Bash(git worktree:*)",
+      "mcp__aws-mcp__aws___retrieve_agent_sop",
+      "WebFetch(domain:awslabs.github.io)"
     ]
   }
 }
