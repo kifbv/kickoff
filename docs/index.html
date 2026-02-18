@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kickoff — AI-Driven Development Framework</title>
+  <meta name="description" content="From 'I have an idea' to autonomous implementation. A framework for AI-driven development using the Ralph loop pattern.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ── Nav ── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">KICKOFF</a>
+    <ul class="nav-links">
+      <li><a href="#problem">Problem</a></li>
+      <li><a href="#what">Framework</a></li>
+      <li><a href="#pipeline">Pipeline</a></li>
+      <li><a href="#principles">Principles</a></li>
+      <li><a href="#cta">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── 1. Hero ── -->
+<section id="hero" class="hero">
+  <div class="container">
+    <h1 class="hero-title">KICKOFF</h1>
+    <p class="hero-subtitle">From "I have an idea" to autonomous implementation. A framework for AI-driven development using the Ralph loop pattern.</p>
+    <div class="hero-ctas">
+      <a href="#pipeline" class="btn btn-primary">See How It Works</a>
+      <a href="https://github.com/kifbv/kickoff" class="btn btn-ghost" target="_blank" rel="noopener">View on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── 2. The Problem ── -->
+<section id="problem">
+  <div class="container">
+    <p class="section-label">The Problem</p>
+    <div class="problem reveal">
+      <p>AI can write code. But without structure, it writes the <span class="highlight-magenta">wrong code</span> — hallucinating requirements, losing context mid-task, and producing work that doesn't integrate.</p>
+      <p>Throwing a vague prompt at an LLM and hoping for a production app is like handing someone lumber and saying <span class="highlight-magenta">"build me a house."</span> You get walls that don't connect, rooms that serve no purpose, and a foundation that crumbles under load.</p>
+      <p>The missing piece isn't smarter models. It's <span class="highlight-magenta">structured process</span> — deterministic inputs, atomic tasks, and quality gates that keep AI on the rails.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── 3. What is Kickoff ── -->
+<section id="what">
+  <div class="container">
+    <p class="section-label">Framework</p>
+    <h2 class="reveal">What is Kickoff</h2>
+    <p class="reveal" style="color: var(--text-secondary); max-width: 640px;">Kickoff guides you through a series of phases to take a greenfield project from idea to working code. It uses the Ralph loop pattern — a bash-driven outer loop that feeds one atomic task at a time into Claude Code, keeping each iteration inside the model's "smart zone."</p>
+
+    <div class="cards-grid">
+      <div class="card reveal">
+        <h3>Ralph Loop</h3>
+        <p>A bash outer loop that picks one story, implements it, runs quality checks, commits, and repeats. Fresh context every iteration — no pollution, maximum utilization.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Smart Zone</h3>
+        <p>With ~176K usable tokens, 40-60% is the "smart zone." One task per loop iteration means 100% smart zone utilization — the model operates at peak capability.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Feature Atomicity</h3>
+        <p>Every user story must be completable in one context window. If you can't describe the change in 2-3 sentences, it's too big. No half-completed code, no broken state.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Backpressure</h3>
+        <p>Tests, typechecks, and lints must pass before committing. Quality gates force correctness — the loop self-corrects through iteration rather than hoping for the best.</p>
+      </div>
+    </div>
+
+    <!-- Ralph Loop SVG -->
+    <svg class="pipeline-svg reveal" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" style="margin-top: 48px;">
+      <defs>
+        <filter id="glowCyanLoop" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="4" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <marker id="arrowCyanLoop" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse" fill="#00d4ff">
+          <path d="M 0 0 L 10 5 L 0 10 z"/>
+        </marker>
+      </defs>
+
+      <!-- Center label -->
+      <text x="200" y="192" text-anchor="middle" fill="#6b7094" font-family="'JetBrains Mono', monospace" font-size="11" letter-spacing=".1em">ONE</text>
+      <text x="200" y="210" text-anchor="middle" fill="#6b7094" font-family="'JetBrains Mono', monospace" font-size="11" letter-spacing=".1em">ITERATION</text>
+
+      <!-- Steps arranged in circle (r=140, center 200,200) -->
+      <!-- 0: Read State (top) -->
+      <circle cx="200" cy="60" r="6" fill="#00d4ff" filter="url(#glowCyanLoop)"/>
+      <text x="200" y="42" text-anchor="middle" fill="#e0e0e8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="500">Read State</text>
+
+      <!-- 1: Pick Story (top-right) -->
+      <circle cx="321" cy="113" r="6" fill="#00d4ff" filter="url(#glowCyanLoop)"/>
+      <text x="341" y="108" text-anchor="start" fill="#e0e0e8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="500">Pick</text>
+      <text x="341" y="122" text-anchor="start" fill="#e0e0e8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="500">Story</text>
+
+      <!-- 2: Test First (right) -->
+      <circle cx="340" cy="200" r="6" fill="#00d4ff" filter="url(#glowCyanLoop)"/>
+      <text x="356" y="204" text-anchor="start" fill="#e0e0e8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="500">Test First</text>
+
+      <!-- 3: Implement (bottom-right) -->
+      <circle cx="321" cy="287" r="6" fill="#00d4ff" filter="url(#glowCyanLoop)"/>
+      <text x="341" y="291" text-anchor="start" fill="#e0e0e8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="500">Implement</text>
+
+      <!-- 4: Quality Gate (bottom) -->
+      <circle cx="200" cy="340" r="6" fill="#ffb800" filter="url(#glowCyanLoop)"/>
+      <text x="200" y="364" text-anchor="middle" fill="#ffb800" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">Quality Gate</text>
+
+      <!-- 5: Commit (bottom-left) -->
+      <circle cx="79" cy="287" r="6" fill="#00d4ff" filter="url(#glowCyanLoop)"/>
+      <text x="59" y="291" text-anchor="end" fill="#e0e0e8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="500">Commit</text>
+
+      <!-- 6: Update State (left) -->
+      <circle cx="60" cy="200" r="6" fill="#00d4ff" filter="url(#glowCyanLoop)"/>
+      <text x="44" y="196" text-anchor="end" fill="#e0e0e8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="500">Update</text>
+      <text x="44" y="210" text-anchor="end" fill="#e0e0e8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="500">State</text>
+
+      <!-- Connecting arcs (circular path segments) -->
+      <path d="M 206,62 A 140,140 0 0,1 315,109" fill="none" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrowCyanLoop)" opacity=".7"/>
+      <path d="M 325,119 A 140,140 0 0,1 338,194" fill="none" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrowCyanLoop)" opacity=".7"/>
+      <path d="M 338,206 A 140,140 0 0,1 325,281" fill="none" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrowCyanLoop)" opacity=".7"/>
+      <path d="M 315,291 A 140,140 0 0,1 206,338" fill="none" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrowCyanLoop)" opacity=".7"/>
+      <path d="M 194,338 A 140,140 0 0,1 85,291" fill="none" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrowCyanLoop)" opacity=".7"/>
+      <path d="M 75,281 A 140,140 0 0,1 62,206" fill="none" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrowCyanLoop)" opacity=".7"/>
+      <path d="M 62,194 A 140,140 0 0,1 75,119" fill="none" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrowCyanLoop)" opacity=".7"/>
+      <path d="M 85,109 A 140,140 0 0,1 194,62" fill="none" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrowCyanLoop)" opacity=".7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ── 4. The Pipeline ── -->
+<section id="pipeline">
+  <div class="container pipeline-section">
+    <p class="section-label">Workflow</p>
+    <h2 class="reveal">The Pipeline</h2>
+    <p class="reveal" style="color: var(--text-secondary); max-width: 520px; margin: 0 auto;">Six phases take you from a vague idea to a shipped product. Each phase narrows scope and increases precision.</p>
+
+    <!-- Pipeline SVG -->
+    <svg class="pipeline-svg reveal" viewBox="0 0 460 920" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="glowCyan" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="5" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="glowCyanSoft" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <marker id="arrowCyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse" fill="#00d4ff">
+          <path d="M 0 0 L 10 5 L 0 10 z"/>
+        </marker>
+      </defs>
+
+      <!-- Vertical glowing line -->
+      <line x1="100" y1="80" x2="100" y2="720" stroke="#00d4ff" stroke-width="2" opacity=".3" filter="url(#glowCyanSoft)"/>
+
+      <!-- Phase 1: Interview -->
+      <circle cx="100" cy="80" r="10" fill="none" stroke="#00d4ff" stroke-width="2" filter="url(#glowCyan)"/>
+      <circle cx="100" cy="80" r="4" fill="#00d4ff"/>
+      <text x="130" y="76" fill="#e0e0e8" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700">Interview</text>
+      <text x="130" y="96" fill="#6b7094" font-family="'JetBrains Mono', monospace" font-size="11">Define vision, users, scope</text>
+      <text x="130" y="114" fill="#00d4ff" font-family="'JetBrains Mono', monospace" font-size="10" opacity=".7">→ project-overview.md</text>
+
+      <!-- Phase 2: Infra -->
+      <circle cx="100" cy="210" r="10" fill="none" stroke="#00d4ff" stroke-width="2" filter="url(#glowCyan)"/>
+      <circle cx="100" cy="210" r="4" fill="#00d4ff"/>
+      <text x="130" y="206" fill="#e0e0e8" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700">Infra</text>
+      <text x="130" y="226" fill="#6b7094" font-family="'JetBrains Mono', monospace" font-size="11">Design serverless architecture</text>
+      <text x="130" y="244" fill="#00d4ff" font-family="'JetBrains Mono', monospace" font-size="10" opacity=".7">→ template.yaml</text>
+      <text x="325" y="206" fill="#6b7094" font-family="'JetBrains Mono', monospace" font-size="10" font-style="italic">optional</text>
+
+      <!-- Phase 3: Design Sync -->
+      <circle cx="100" cy="340" r="10" fill="none" stroke="#00d4ff" stroke-width="2" filter="url(#glowCyan)"/>
+      <circle cx="100" cy="340" r="4" fill="#00d4ff"/>
+      <text x="130" y="336" fill="#e0e0e8" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700">Design Sync</text>
+      <text x="130" y="356" fill="#6b7094" font-family="'JetBrains Mono', monospace" font-size="11">Import UI mockups</text>
+      <text x="130" y="374" fill="#00d4ff" font-family="'JetBrains Mono', monospace" font-size="10" opacity=".7">→ DESIGN.md, specs/</text>
+      <text x="325" y="336" fill="#6b7094" font-family="'JetBrains Mono', monospace" font-size="10" font-style="italic">optional</text>
+
+      <!-- Phase 4: Discover -->
+      <circle cx="100" cy="470" r="10" fill="none" stroke="#00d4ff" stroke-width="2" filter="url(#glowCyan)"/>
+      <circle cx="100" cy="470" r="4" fill="#00d4ff"/>
+      <text x="130" y="466" fill="#e0e0e8" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700">Discover</text>
+      <text x="130" y="486" fill="#6b7094" font-family="'JetBrains Mono', monospace" font-size="11">Generate feature specs</text>
+      <text x="130" y="504" fill="#00d4ff" font-family="'JetBrains Mono', monospace" font-size="10" opacity=".7">→ specs/*.md</text>
+
+      <!-- Phase 5: Plan -->
+      <circle cx="100" cy="600" r="10" fill="none" stroke="#00d4ff" stroke-width="2" filter="url(#glowCyan)"/>
+      <circle cx="100" cy="600" r="4" fill="#00d4ff"/>
+      <text x="130" y="596" fill="#e0e0e8" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700">Plan</text>
+      <text x="130" y="616" fill="#6b7094" font-family="'JetBrains Mono', monospace" font-size="11">Atomic, prioritized tasks</text>
+      <text x="130" y="634" fill="#00d4ff" font-family="'JetBrains Mono', monospace" font-size="10" opacity=".7">→ prd.json</text>
+
+      <!-- Phase 6: Build -->
+      <circle cx="100" cy="730" r="14" fill="none" stroke="#00d4ff" stroke-width="2.5" filter="url(#glowCyan)"/>
+      <circle cx="100" cy="730" r="5" fill="#00d4ff"/>
+      <text x="130" y="726" fill="#e0e0e8" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700">Build</text>
+      <text x="130" y="746" fill="#6b7094" font-family="'JetBrains Mono', monospace" font-size="11">One story per iteration</text>
+      <text x="130" y="764" fill="#00d4ff" font-family="'JetBrains Mono', monospace" font-size="10" opacity=".7">→ working code</text>
+
+      <!-- Loop-back arrow for Build -->
+      <path d="M 86,730 A 50,60 0 1,0 86,730.01" fill="none" stroke="#00d4ff" stroke-width="1.5" stroke-dasharray="4,3" opacity=".5"
+            transform="translate(-52, 0)"/>
+      <text x="14" y="734" text-anchor="middle" fill="#00d4ff" font-family="'JetBrains Mono', monospace" font-size="9" opacity=".7">loop</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ── 5. Core Principles ── -->
+<section id="principles">
+  <div class="container">
+    <p class="section-label">Principles</p>
+    <h2 class="reveal">Steering the Loop</h2>
+
+    <!-- Upstream/Downstream SVG -->
+    <svg class="upstream-svg reveal" viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="glowCyanUD" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="4" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="glowAmber" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <marker id="arrowCyanUD" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse" fill="#00d4ff">
+          <path d="M 0 0 L 10 5 L 0 10 z"/>
+        </marker>
+        <marker id="arrowMagenta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse" fill="#ff2d6b">
+          <path d="M 0 0 L 10 5 L 0 10 z"/>
+        </marker>
+      </defs>
+
+      <!-- Upstream inputs (left column) -->
+      <text x="95" y="24" text-anchor="middle" fill="#ffb800" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" letter-spacing=".1em">UPSTREAM</text>
+
+      <rect x="20" y="40" width="150" height="32" rx="4" fill="none" stroke="#ffb800" stroke-width="1.5" filter="url(#glowAmber)"/>
+      <text x="95" y="61" text-anchor="middle" fill="#ffb800" font-family="'JetBrains Mono', monospace" font-size="11">specs/*</text>
+
+      <rect x="20" y="84" width="150" height="32" rx="4" fill="none" stroke="#ffb800" stroke-width="1.5" filter="url(#glowAmber)"/>
+      <text x="95" y="105" text-anchor="middle" fill="#ffb800" font-family="'JetBrains Mono', monospace" font-size="11">CLAUDE.md</text>
+
+      <rect x="20" y="128" width="150" height="32" rx="4" fill="none" stroke="#ffb800" stroke-width="1.5" filter="url(#glowAmber)"/>
+      <text x="95" y="149" text-anchor="middle" fill="#ffb800" font-family="'JetBrains Mono', monospace" font-size="11">prd.json</text>
+
+      <rect x="20" y="172" width="150" height="32" rx="4" fill="none" stroke="#ffb800" stroke-width="1.5" filter="url(#glowAmber)"/>
+      <text x="95" y="193" text-anchor="middle" fill="#ffb800" font-family="'JetBrains Mono', monospace" font-size="11">progress.txt</text>
+
+      <!-- Center: Ralph Smart Zone -->
+      <rect x="290" y="55" width="220" height="140" rx="6" fill="rgba(0, 212, 255, .05)" stroke="#00d4ff" stroke-width="2" filter="url(#glowCyanUD)"/>
+      <text x="400" y="120" text-anchor="middle" fill="#00d4ff" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700">Ralph</text>
+      <text x="400" y="140" text-anchor="middle" fill="#00d4ff" font-family="'JetBrains Mono', monospace" font-size="11" opacity=".7">Smart Zone</text>
+
+      <!-- Downstream quality gates (right column) -->
+      <text x="700" y="24" text-anchor="middle" fill="#ffb800" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" letter-spacing=".1em">DOWNSTREAM</text>
+
+      <rect x="625" y="40" width="150" height="32" rx="4" fill="none" stroke="#ffb800" stroke-width="1.5" filter="url(#glowAmber)"/>
+      <text x="700" y="61" text-anchor="middle" fill="#ffb800" font-family="'JetBrains Mono', monospace" font-size="11">Tests</text>
+
+      <rect x="625" y="84" width="150" height="32" rx="4" fill="none" stroke="#ffb800" stroke-width="1.5" filter="url(#glowAmber)"/>
+      <text x="700" y="105" text-anchor="middle" fill="#ffb800" font-family="'JetBrains Mono', monospace" font-size="11">Typecheck</text>
+
+      <rect x="625" y="128" width="150" height="32" rx="4" fill="none" stroke="#ffb800" stroke-width="1.5" filter="url(#glowAmber)"/>
+      <text x="700" y="149" text-anchor="middle" fill="#ffb800" font-family="'JetBrains Mono', monospace" font-size="11">Lint</text>
+
+      <rect x="625" y="172" width="150" height="32" rx="4" fill="none" stroke="#ffb800" stroke-width="1.5" filter="url(#glowAmber)"/>
+      <text x="700" y="193" text-anchor="middle" fill="#ffb800" font-family="'JetBrains Mono', monospace" font-size="11">Browser</text>
+
+      <!-- Forward arrows (cyan) -->
+      <line x1="170" y1="105" x2="285" y2="125" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrowCyanUD)" opacity=".6"/>
+      <line x1="515" y1="125" x2="620" y2="105" stroke="#00d4ff" stroke-width="1.5" marker-end="url(#arrowCyanUD)" opacity=".6"/>
+
+      <!-- Backpressure arrow (magenta, dashed) -->
+      <line x1="620" y1="235" x2="180" y2="235" stroke="#ff2d6b" stroke-width="2" stroke-dasharray="8,4" marker-end="url(#arrowMagenta)" opacity=".7"/>
+      <text x="400" y="260" text-anchor="middle" fill="#ff2d6b" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="500" letter-spacing=".1em">BACKPRESSURE</text>
+    </svg>
+
+    <div class="principle-cards">
+      <div class="principle-card reveal">
+        <h3>Upstream</h3>
+        <p>Control what the AI sees. Specs, CLAUDE.md, prd.json, and progress.txt are loaded deterministically at the start of each iteration. Garbage in, garbage out — so curate the input.</p>
+      </div>
+      <div class="principle-card reveal">
+        <h3>Downstream</h3>
+        <p>Control what the AI must satisfy. Tests, typechecks, lints, and browser verification form a quality gauntlet. Nothing ships until everything passes.</p>
+      </div>
+      <div class="principle-card reveal">
+        <h3>Let Ralph Ralph</h3>
+        <p>Trust the loop to self-correct through iteration. Eventual consistency beats micro-management. A wrong plan is cheap to regenerate — let the loop find its way.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 6. CTA Block ── -->
+<section id="cta" class="cta-section">
+  <div class="container">
+    <h2 class="reveal">Get Started</h2>
+    <div class="code-block reveal">
+      <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      <code>curl -sfL https://raw.githubusercontent.com/kifbv/kickoff/main/scripts/install.sh | bash -s ~/Projects/my-app "My App"
+cd ~/Projects/my-app && ./ralph/ralph.sh interview</code>
+    </div>
+    <a href="https://github.com/kifbv/kickoff#readme" class="cta-link" target="_blank" rel="noopener">Read the Docs →</a>
+  </div>
+</section>
+
+<!-- ── 7. Footer ── -->
+<footer class="footer">
+  <div class="container">
+    <ul class="footer-links">
+      <li><a href="https://github.com/kifbv/kickoff" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="https://github.com/kifbv/kickoff/blob/main/docs/philosophy.md" target="_blank" rel="noopener">Philosophy</a></li>
+      <li><a href="https://github.com/kifbv/kickoff/blob/main/LICENSE" target="_blank" rel="noopener">License</a></li>
+    </ul>
+  </div>
+</footer>
+
+<!-- ── Scripts ── -->
+<script>
+// Copy button
+function copyCode(btn) {
+  const code = btn.parentElement.querySelector('code').textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 1500);
+  });
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Scroll spy
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+
+</body>
+</html>
