@@ -27,7 +27,7 @@ Kickoff guides you through a series of phases to take a greenfield project from 
 **Recommended:**
 
 - [obra/superpowers](https://github.com/obra/superpowers) skills - TDD, debugging, brainstorming, and other structured workflows that improve build quality
-- [agent-browser](https://github.com/anthropics/agent-browser) skill - used by the build phase to verify UI changes in a real browser
+- [agent-browser](https://github.com/vercel-labs/agent-browser) skill - used by the build phase to verify UI changes in a real browser
 
 **Optional:**
 
