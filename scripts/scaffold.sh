@@ -117,6 +117,10 @@ build/
 .DS_Store
 Thumbs.db
 
+# AI agent directories
+**/.claude/
+**/.agents/
+
 # Ralph internal
 .last-branch
 GITIGNORE
@@ -140,7 +144,10 @@ echo "  1. cd $TARGET_DIR"
 echo "  2. Run the interview to define your project:"
 echo "     ./ralph/ralph.sh interview"
 echo ""
-echo "  2b. (Optional) Design AWS infrastructure:"
+echo "  2b. (Optional) Import UI designs from Stitch:"
+echo "      Use the /design-sync skill in Claude Code"
+echo ""
+echo "  2c. (Optional) Design AWS infrastructure:"
 echo "      ./ralph/ralph.sh infra"
 echo ""
 echo "  3. Generate feature specs from the interview:"
