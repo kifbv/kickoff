@@ -77,7 +77,8 @@ Generate these artifacts:
 1. **`specs/infrastructure.md`** - Architecture overview, resource inventory, data flow, security, environment config
 2. **`infra/template.yaml`** - Valid SAM template with Globals, Parameters, Resources (each with Description), and Outputs
 3. **`infra/samconfig.toml`** - Deployment configuration
-4. **Update `specs/project-overview.md`** - Add Infrastructure section summary
+4. **`infra/deployer-policy.json`** - IAM policy document with permissions needed to deploy the stack (for the user to attach to Ralph's IAM user before running build)
+5. **Update `specs/project-overview.md`** - Add Infrastructure section summary
 
 Then suggest: "Run `./ralph/ralph.sh discover` to generate feature specs."
 

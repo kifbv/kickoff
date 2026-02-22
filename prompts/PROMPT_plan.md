@@ -76,6 +76,8 @@ Stories execute in priority order. Earlier stories must not depend on later ones
 
 **Infrastructure stories:** If `specs/infrastructure.md` exists, generate infrastructure deployment stories (category: `infrastructure`) early in the dependency chain. The first infra story should deploy the initial SAM stack. Subsequent infra stories can modify `infra/template.yaml` as needed by later features.
 
+**IAM prerequisite:** If `infra/deployer-policy.json` exists, the first infrastructure story must include an acceptance criterion: "Verify deployer has required IAM permissions by running `aws sts get-caller-identity` and `aws cloudformation validate-template`". Add a note to the story reminding the user to attach the deployer policy before running build.
+
 ## Guardrails
 
 99999. PLAN ONLY. Do NOT implement anything.

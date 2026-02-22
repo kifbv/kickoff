@@ -66,6 +66,7 @@ Core workflow:
 
 When working on stories with category `infrastructure`:
 
+0. **Permission check:** If this is the first infrastructure story, verify deployer permissions by running `aws sts get-caller-identity`. If it fails or returns an unexpected identity, stop and inform the user. If `infra/deployer-policy.json` exists, remind the user to ensure the policy has been attached to the deploying IAM user/role before proceeding.
 1. Modify `infra/template.yaml` as needed for the story.
 2. Run `sam validate -t infra/template.yaml` as a quality gate.
 3. Run `sam build -t infra/template.yaml`.

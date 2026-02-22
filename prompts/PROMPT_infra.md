@@ -149,6 +149,54 @@ After generating all artifacts:
 2. Use the AWS MCP `search_documentation` tool with topic `cloudformation` to verify any SAM policy template names used (e.g., `DynamoDBCrudPolicy`, `S3ReadPolicy`) are real SAM policy templates.
 3. Inform the user whether validation passed.
 
+## Deployer Permissions
+
+After generating and validating the template, create `infra/deployer-policy.json`:
+
+1. Analyze every resource type in `template.yaml` (Lambda, DynamoDB, S3, API Gateway, Cognito, SQS, SNS, etc.)
+2. Generate a minimal IAM policy document granting the permissions needed to **deploy** these resources via CloudFormation/SAM — not to run them.
+3. Always include these baseline permissions:
+   - `cloudformation:*` on the stack ARN and `arn:aws:cloudformation:*:*:transform/AWS::Serverless-*`
+   - `s3:*` on the SAM artifacts bucket (used by `resolve_s3`)
+   - `iam:CreateRole`, `iam:AttachRolePolicy`, `iam:PutRolePolicy`, `iam:DeleteRole`, `iam:DetachRolePolicy`, `iam:DeleteRolePolicy`, `iam:GetRole`, `iam:PassRole`, `iam:TagRole` (for Lambda execution roles created by SAM)
+4. Add service-specific permissions based on resources in the template (e.g., `lambda:*`, `dynamodb:CreateTable`, `dynamodb:DeleteTable`, `dynamodb:DescribeTable`, `dynamodb:UpdateTable`, `apigateway:*`, `logs:*`)
+5. Use least-privilege where practical, but prefer working permissions over minimal-but-broken ones
+
+Write the policy to `infra/deployer-policy.json` as a valid IAM policy document:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "CloudFormationDeploy",
+      "Effect": "Allow",
+      "Action": ["cloudformation:*"],
+      "Resource": "*"
+    }
+  ]
+}
+```
+
+Then print instructions for the user:
+
+```
+## Before running `ralph.sh build`
+
+Ralph needs IAM permissions to deploy this infrastructure.
+Run these commands with an admin/privileged account:
+
+  aws iam create-policy \
+    --policy-name ralph-deployer-{project-name} \
+    --policy-document file://infra/deployer-policy.json
+
+  aws iam attach-user-policy \
+    --user-name {ralph-iam-user} \
+    --policy-arn arn:aws:iam::{account-id}:policy/ralph-deployer-{project-name}
+
+Replace {ralph-iam-user} and {account-id} with your values.
+```
+
 ## Guardrails
 
 99999. Every SAM resource in `template.yaml` must have a `Description` property.
