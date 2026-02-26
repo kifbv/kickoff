@@ -59,6 +59,7 @@ Guide the user through:
 1. `cd <target-directory>`
 2. Edit `CLAUDE.md` to add project-specific build/test/lint commands
 3. Run `./ralph/ralph.sh interview` to define the project
-4. Run `./ralph/ralph.sh discover` to generate feature specs
-5. Run `./ralph/ralph.sh plan` to create implementation plan
-6. Run `./ralph/ralph.sh build` to start building
+4. (Optional) Run `./ralph/ralph.sh infra` to design AWS infrastructure
+5. Run `./ralph/ralph.sh discover` to generate feature specs
+6. Run `./ralph/ralph.sh plan` to create implementation plan
+7. Run `./ralph/ralph.sh build` to start building

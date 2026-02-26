@@ -357,6 +357,7 @@ Log Match Result        | Mobile   | 390x884
 
 Suggest next steps based on project state:
 
+- If no infrastructure defined and project needs cloud infra: "Run `./ralph/ralph.sh infra` to design AWS infrastructure."
 - If JTBD remain without specs: "Run `./ralph/ralph.sh discover` to spec remaining features."
 - If all JTBD have specs: "Run `./ralph/ralph.sh plan` to create the implementation plan."
 - To convert designs to React components: "Run `/react-components` on individual screens."

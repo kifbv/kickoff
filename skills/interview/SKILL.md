@@ -74,7 +74,10 @@ Create `specs/project-overview.md` with:
 - Quality gates
 - Success criteria
 
-Then print a summary and suggest: "Run `./ralph/ralph.sh discover` to generate feature specs."
+Then print a summary and suggest next steps:
+- (Optional) "Use the `/design-sync` skill to import UI designs from Stitch" (if the project has designs)
+- (Optional) "Run `./ralph/ralph.sh infra` to design AWS infrastructure" (if the project needs cloud infra)
+- "Run `./ralph/ralph.sh discover` to generate feature specs."
 
 ---
 
