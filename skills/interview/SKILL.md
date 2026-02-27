@@ -75,7 +75,8 @@ Create `specs/project-overview.md` with:
 - Success criteria
 
 Then print a summary and suggest next steps:
-- (Optional) "Use the `/design-sync` skill to import UI designs from Stitch" (if the project has designs)
+- (Optional) "Use the `/design-create` skill to generate UI mockups in Stitch" (if the project has no designs yet)
+- (Optional) "Use the `/design-sync` skill to import existing UI designs from Stitch" (if the project already has designs)
 - (Optional) "Run `./ralph/ralph.sh infra` to design AWS infrastructure" (if the project needs cloud infra)
 - "Run `./ralph/ralph.sh discover` to generate feature specs."
 

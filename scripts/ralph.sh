@@ -133,7 +133,7 @@ if [ "$MODE" = "update" ]; then
 
   # Update skills
   SKILLS_DIR="$PROJECT_DIR/.claude/skills"
-  for skill in design-sync discover infra interview prd prd-to-json; do
+  for skill in design-create design-sync discover infra interview prd prd-to-json; do
     mkdir -p "$SKILLS_DIR/$skill"
     if curl -sfL "$REPO_URL/skills/${skill}/SKILL.md" -o "$SKILLS_DIR/$skill/SKILL.md.tmp"; then
       mv "$SKILLS_DIR/$skill/SKILL.md.tmp" "$SKILLS_DIR/$skill/SKILL.md"

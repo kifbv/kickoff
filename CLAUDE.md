@@ -7,7 +7,7 @@ Greenfield project scaffolding framework using the Ralph loop pattern.
 - `scripts/` - Core scripts (ralph.sh loop, scaffold.sh)
 - `prompts/` - Prompt templates for each phase (interview, discover, plan, build)
 - `templates/` - Files copied into scaffolded projects
-- `skills/` - Claude Code skills (interview, discover, prd, prd-to-json, scaffold, design-sync)
+- `skills/` - Claude Code skills (interview, discover, prd, prd-to-json, scaffold, design-create, design-sync)
 - `docs/` - Documentation
 
 ## How It Works

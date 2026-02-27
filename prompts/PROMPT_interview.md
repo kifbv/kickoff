@@ -107,7 +107,8 @@ After writing the file, print a summary of:
 - Project name and one-line description
 - Number of JTBD identified
 - Recommended next steps:
-  - (Optional) If the project has UI designs in Stitch: "Use the `/design-sync` skill to import designs"
+  - (Optional) If the project has no UI designs yet: "Use the `/design-create` skill to generate mockups in Stitch"
+  - (Optional) If the project has existing UI designs in Stitch: "Use the `/design-sync` skill to import designs"
   - (Optional) If the project needs cloud infrastructure: "Run `./ralph.sh infra` to design AWS infrastructure"
   - Then: "Run `./ralph.sh discover` to generate feature specs for each JTBD"
 
